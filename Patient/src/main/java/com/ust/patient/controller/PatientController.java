@@ -1,5 +1,6 @@
 package com.ust.patient.controller;
 
+import com.ust.patient.client.Appointment;
 import com.ust.patient.model.Patient;
 import com.ust.patient.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,9 @@ public class PatientController {
         return ResponseEntity.ok(patientService.getPatientById(id));
     }
 
+    @PostMapping("/bookAppointment")
+    public ResponseEntity<Appointment> bookAppointment(@RequestBody Appointment appointment) {
+        return ResponseEntity.ok(patientService.bookAppointment(appointment));
+    }
 
 }

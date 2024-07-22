@@ -1,5 +1,6 @@
 package com.ust.receptionist.model.Controller;
 
+import com.ust.receptionist.client.Appointment;
 import com.ust.receptionist.model.Receptionist;
 import com.ust.receptionist.service.ReceptionistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class ReceptionistController {
 
     public ResponseEntity<Receptionist> getReceptionist(@PathVariable Long id) {
         return ResponseEntity.ok(receptionistService.findById(id));
+    }
+
+    @GetMapping("confirmAppointment/{id}")
+    public ResponseEntity<Appointment> confirmAppointment(@PathVariable Long id) {
+        return ResponseEntity.ok(receptionistService.confirmBooking(id));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ust.doctor.controller;
 
+import com.ust.doctor.client.Appointment;
 import com.ust.doctor.model.Doctor;
 import com.ust.doctor.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class DoctorController {
     @GetMapping("/getDoctor/{id}")
     public ResponseEntity<Doctor> getDoctor(@PathVariable Long id) {
         return ResponseEntity.ok(doctorService.findById(id));
+    }
+
+    @GetMapping("/getAppointments/{id}")
+    public ResponseEntity<List<Appointment>> getAppointments(@PathVariable Long id) {
+        return ResponseEntity.ok(doctorService.getAppointmentByDoctorId(id));
     }
 }

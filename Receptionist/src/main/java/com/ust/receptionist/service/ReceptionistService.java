@@ -1,5 +1,7 @@
 package com.ust.receptionist.service;
 
+import com.ust.receptionist.client.Appointment;
+import com.ust.receptionist.feign.AppointmentClient;
 import com.ust.receptionist.model.Receptionist;
 import com.ust.receptionist.repository.ReceptionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class ReceptionistService {
     @Autowired
     private ReceptionistRepository receptionistRepository;
 
+    @Autowired
+    private AppointmentClient appointmentClient;
+
     public List<Receptionist> findAll() {
         return receptionistRepository.findAll();
     }
@@ -22,6 +27,12 @@ public class ReceptionistService {
     }
     public Receptionist save(Receptionist receptionist) {
         return receptionistRepository.save(receptionist);
+    }
+
+    public Appointment confirmBooking(Long id) {
+        Appointment appointment = appointmentClient.getAppointmentById(id);
+        appointment.setStatus("Confirmed");
+        return appointmentClient.changeStatus(appointment);
     }
 
 }
