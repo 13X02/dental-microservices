@@ -12,11 +12,21 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: productservice
-          uri: http://localhost:9098
-          predicates:
-            - Path=/product/**
-        - id: mservice
+        - id: doctorservice
           uri: http://localhost:9099
           predicates:
-            - Path=/company/**
+            - Path=/doctors/**
+        - id: patientservice
+          uri: http://localhost:9098
+          predicates:
+            - Path=/patient/**
+
+        - id: receptionistservice
+          uri: http://localhost:9100
+          predicates:
+            - Path=/receptionist/**
+
+        - id: appointmentservice
+          uri: http://localhost:9101
+          predicates:
+            - Path=/appointment/**
